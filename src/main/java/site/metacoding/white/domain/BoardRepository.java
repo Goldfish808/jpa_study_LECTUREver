@@ -14,8 +14,9 @@ public class BoardRepository {
 
     private final EntityManager em;
 
-    public void save(Board board) {
+    public Board save(Board board) {
         em.persist(board);
+        return board;
     }
 
     public Board findById(Long id) {

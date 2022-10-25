@@ -14,4 +14,8 @@ public class SessionUser {
         this.id = user.getId();
         this.username = user.getUsername();
     }
+
+    public User toEntity() {
+        return User.builder().id(id).username(username).build();
+    }
 }
