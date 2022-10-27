@@ -21,6 +21,19 @@ public class BoardRepository {
     }
 
     public Optional<Board> findById(Long id) {
+
+        // 게시글의 댓글까지 보기 위해서
+        // try {
+        // Optional<Board> boardOP = Optional.of(
+        // em.createNativeQuery("select * from board b inner join user u on b.user_id =
+        // u.id where b.id = :id",Board.class)
+        // .setParameter("id", id)
+        // .getSingleResult());
+        // return boardOP;
+        // } catch (Exception e) {
+        // return Optional.empty();
+        // }
+
         // JPQL 문법
         try {
             Optional<Board> boardOP = Optional.of(
