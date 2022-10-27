@@ -38,4 +38,14 @@ public class CommentService {
         }
     }
 
+    @Transactional
+    public void deleteById(Long id) {
+        Optional<Comment> commentOP = commentRepository.findById(id);
+        if (commentOP.isPresent()) {
+            commentRepository.deleteById(id);
+        } else {
+            throw new RuntimeException(id + " 에 해당하는 댓글이 존재하지 않습니다");
+        }
+    }
+
 }
