@@ -3,6 +3,7 @@ package site.metacoding.white.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -31,11 +32,12 @@ public class Board {
     @Column(length = 1000)
     private String content;
 
-    @OneToMany(mappedBy = "board", fetch = FetchType.LAZY) // FK 가 아닌 조회를 위한 ' 컬럼 ', Board 테이블 SELECT 시 필요함
+    @OneToMany(mappedBy = "board", fetch = FetchType.LAZY) // FK 가 아닌 조회를 위한 ' 컬럼 ', Board
+                                                           // 테이블 SELECT 시 필요함
     private List<Comment> comments = new ArrayList<>();
 
     // FK가 만들어짐. user_id
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private User user;
 
     @Builder
