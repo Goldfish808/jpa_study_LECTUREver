@@ -57,14 +57,14 @@ public class JwtAuthenticationFilter implements Filter {
         log.debug("디버그 : " + loginReqDto.getPassword());
 
         // 유저네임 있는지 체크
-        User userPS = userRepository.findByUsername(loginReqDto.getUsername());
-        if (userPS == null) {
-            // findByUsername 나중에 처리하기
+        Optional<User> userOP = userRepository.findByUsername(loginReqDto.getUsername());
+        if (userOP.isEmpty()) {
             customResponse("유저네임을 찾을 수 없습니다.", resp);
             return;
         }
 
         // 패스워드 체크
+        User userPS = userOP.get();
         SHA256 sh = new SHA256();
         String encPassword = sh.encrypt(loginReqDto.getPassword());
         if (!userPS.getPassword().equals(encPassword)) {
