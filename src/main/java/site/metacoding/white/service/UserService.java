@@ -42,15 +42,26 @@ public class UserService {
 
         String encPassword = sha256.encrypt(loginReqDto.getPassword());
 
-        System.out.println("=================================");
-        System.out.println(encPassword);
-        System.out.println("=================================");
-        Optional<User> userPS = userRepository.findByUsername(loginReqDto.getUsername());
-        if (userPS.get().getPassword().equals(encPassword)) {
-            return new SessionUser(userPS.get());
-        } else {
+        // Optional<User> userPS =
+        // userRepository.findByUsername(loginReqDto.getUsername());
+        // if (userPS.get().getPassword().equals(encPassword)) {
+        // return new SessionUser(userPS.get());
+        // } else {
+        // throw new RuntimeException("아이디 혹은 패스워드가 잘못 입력되었습니다.");
+        // }
+
+        Optional<User> userOP = userRepository.findByUsername(loginReqDto.getUsername());
+        if (userOP.isEmpty()) {
             throw new RuntimeException("아이디 혹은 패스워드가 잘못 입력되었습니다.");
         }
+
+        User userPS = userOP.get();
+        if (!userPS.getPassword().equals(encPassword)) {
+            throw new RuntimeException("아이디 혹은 패스워드가 잘못 입력되었습니다.");
+        }
+
+        return new SessionUser(userPS);
+
     } // 트랜잭션 종료
 
 }
