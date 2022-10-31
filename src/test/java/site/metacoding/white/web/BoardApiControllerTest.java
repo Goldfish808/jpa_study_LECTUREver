@@ -205,4 +205,14 @@ public class BoardApiControllerTest {
         System.out.println("디버그 : " + mvcResult.getResponse().getContentAsString());
     }
 
+    @Test
+    public void _test() {
+        // given
+
+        // when
+
+        // then
+
+    }
+
 }

@@ -23,5 +23,5 @@ spring:
 logging:
   level:
     '[org.hibernate.SQL]': DEBUG
-    #root: DEBUG
+    '[stie.metacoding.white]': DEBUG
 
